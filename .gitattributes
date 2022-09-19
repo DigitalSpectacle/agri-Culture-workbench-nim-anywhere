@@ -1,0 +1,2 @@
+.static/*.png !text !filter !merge !diff
+code/frontend/_static/images/*.svg !text !filter !merge !diff
