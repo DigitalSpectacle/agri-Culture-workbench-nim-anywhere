@@ -37,7 +37,8 @@ class LogLevels(Enum):
     CRITICAL = "CRITICAL"
 
 
-class Configuration(BaseConfig):
+#class Configuration(BaseConfig):
+class FrontendConfig(BaseConfig, BaseModel): # type: ignore[metaclass]    
     """Configuration for this microservice."""
 
     # configuration fields
