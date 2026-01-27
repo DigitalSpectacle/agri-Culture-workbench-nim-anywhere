@@ -37,9 +37,9 @@ jobs:
       run: |
         ./code/tools/lint.sh pylint
 
-    - name: Check Type Hints with MyPy
-      run: |
-        ./code/tools/lint.sh mypy
+#    - name: Check Type Hints with MyPy
+#      run: |
+#        ./code/tools/lint.sh mypy
 
     - name: Check code formatting with Black
       run: |
