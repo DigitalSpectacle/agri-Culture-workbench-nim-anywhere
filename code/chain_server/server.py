@@ -16,6 +16,7 @@
 """The definition of the NVIDIA Conversational RAG API server."""
 
 import os
+from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
 from fastapi import FastAPI
 from fastapi.middleware import Middleware
@@ -25,8 +26,6 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
 from . import errors
 from .chain import my_chain  # type: ignore
-
-from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
 PROXY_PREFIX = os.environ.get("PROXY_PREFIX", None)
 app = FastAPI(
