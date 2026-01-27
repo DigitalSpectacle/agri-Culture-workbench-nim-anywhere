@@ -38,7 +38,7 @@ class LogLevels(Enum):
 
 
 #class Configuration(BaseConfig):
-class FrontendConfig(BaseConfig, BaseModel): # type: ignore[metaclass]    
+class FrontendConfig(BaseConfig, BaseModel): # type: ignore[metaclass]
     """Configuration for this microservice."""
 
     # configuration fields
