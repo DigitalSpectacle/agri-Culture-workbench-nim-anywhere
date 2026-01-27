@@ -90,11 +90,15 @@ environment:
 #    compose_file_path: ""
 # environment:
     # ... keep your existing base image settings ...
-    variables:
+variables:
         - name: NVIDIA_LLM_URL
           value: "http://host.docker.internal:8000/v1"
         - name: NVIDIA_EMBED_URL
           value: "http://host.docker.internal:8001/v1"
+        - name: LLM_MODEL_NAME
+          value: "meta/llama-3.1-8b-instruct"
+        - name: EMBEDDING_MODEL_NAME
+          value: "nvidia/llama-3.2-nemoretriever-300m-embed-v1"
         - name: NIM_MAX_MODEL_LEN
           value: "16384"
     # This points AI Workbench to your docker-compose file for sidecar NIMs
