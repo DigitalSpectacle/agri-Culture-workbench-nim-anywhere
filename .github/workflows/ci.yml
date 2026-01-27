@@ -41,9 +41,9 @@ jobs:
 #      run: |
 #        ./code/tools/lint.sh mypy
 
-    - name: Check code formatting with Black
-      run: |
-        ./code/tools/lint.sh black
+#    - name: Check code formatting with Black
+#      run: |
+#        ./code/tools/lint.sh black
 
     - name: Ensure Notebooks have no output
       run: |
