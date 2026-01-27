@@ -84,6 +84,7 @@ environment:
                 - jupyterlab==4.0.7
                 - pydantic==1.10.13  # <--- ADD THIS LINE
                 - confz==1.6.0       # <--- ADD THIS LINE for safety
+                - langchain-nvidia-ai-endpoints
         package_manager_environment:
             name: ""
             target: ""
