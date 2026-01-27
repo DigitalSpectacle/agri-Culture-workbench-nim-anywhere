@@ -48,7 +48,6 @@ The variable names will be in the form: `APP_FIELD__SUB_FIELD`
 Values specified as environment variables will take precedence over all values from files.
 
 """
-class AppConfig(BaseConfig, BaseModel): # type: ignore[metaclass]
   
 import logging
 import os
