@@ -85,7 +85,7 @@ environment:
         package_manager_environment:
             name: ""
             target: ""
-    compose_file_path: ""
+#    compose_file_path: ""
 # environment:
     # ... keep your existing base image settings ...
     variables:
@@ -167,8 +167,8 @@ execution:
         sharedMemoryMB: 16384  # Increased for Spark's unified memory usage
     secrets:
         - variable: NGC_API_KEY
-          description: NGC Personal Key from https://org.ngc.nvidia.com/setup/personal-keys
-#          description: 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
+#          description: NGC Personal Key from https://org.ngc.nvidia.com/setup/personal-keys
+          description: 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
     mounts:
         - type: project
           target: /project/
