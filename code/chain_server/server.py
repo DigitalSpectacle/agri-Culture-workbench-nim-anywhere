@@ -59,13 +59,14 @@ def root() -> str:
 FastAPIInstrumentor.instrument_app(app)
 
 # Use the environment variables we set in spec.yaml
+# Updated server.py logic
 llm = ChatNVIDIA(
-    base_url=os.getenv("NVIDIA_LLM_URL"),
-    model=os.getenv("LLM_MODEL_NAME"),
+    base_url=os.getenv("NVIDIA_LLM_URL", "http://host.docker.internal:8000/v1"),
+    model=os.getenv("LLM_MODEL_NAME", "meta/llama-3.1-8b-instruct"),
     temperature=0.1
 )
 
 embedder = NVIDIAEmbeddings(
-    base_url=os.getenv("NVIDIA_EMBED_URL"),
-    model=os.getenv("EMBEDDING_MODEL_NAME")
+    base_url=os.getenv("NVIDIA_EMBED_URL", "http://host.docker.internal:8001/v1"),
+    model=os.getenv("EMBEDDING_MODEL_NAME", "nvidia/llama-3.2-nemoretriever-300m-embed-v1")
 )
