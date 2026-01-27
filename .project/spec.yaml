@@ -152,8 +152,8 @@ execution:
             url: http://localhost:8501
     resources:
         gpu:
-            requested: 0
-        sharedMemoryMB: 1024
+            requested: 1
+        sharedMemoryMB: 16384  # Increased for Spark's unified memory usage
     secrets:
         - variable: NGC_API_KEY
           description: NGC Personal Key from https://org.ngc.nvidia.com/setup/personal-keys
