@@ -82,6 +82,8 @@ environment:
               binary_path: /usr/local/bin/pip
               installed_packages:
                 - jupyterlab==4.0.7
+                - pydantic==1.10.13  # <--- ADD THIS LINE
+                - confz==1.6.0       # <--- ADD THIS LINE for safety
         package_manager_environment:
             name: ""
             target: ""
