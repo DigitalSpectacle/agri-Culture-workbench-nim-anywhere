@@ -26,6 +26,8 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from . import errors
 from .chain import my_chain  # type: ignore
 
+from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
+
 PROXY_PREFIX = os.environ.get("PROXY_PREFIX", None)
 app = FastAPI(
     title="NVIDIA Conversational RAG",
