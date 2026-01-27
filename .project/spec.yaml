@@ -86,6 +86,17 @@ environment:
             name: ""
             target: ""
     compose_file_path: ""
+# environment:
+    # ... keep your existing base image settings ...
+    variables:
+        - name: NVIDIA_LLM_URL
+          value: "http://host.docker.internal:8000/v1"
+        - name: NVIDIA_EMBED_URL
+          value: "http://host.docker.internal:8001/v1"
+        - name: NIM_MAX_MODEL_LEN
+          value: "16384"
+    # This points AI Workbench to your docker-compose file for sidecar NIMs
+    compose_file_path: "docker-compose.yaml"
 execution:
     apps:
         - name: Visual Studio Code
@@ -156,7 +167,8 @@ execution:
         sharedMemoryMB: 16384  # Increased for Spark's unified memory usage
     secrets:
         - variable: NGC_API_KEY
-          description: NGC Personal Key from https://org.ngc.nvidia.com/setup/personal-keys
+#          description: NGC Personal Key from https://org.ngc.nvidia.com/setup/personal-keys
+          description: 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
     mounts:
         - type: project
           target: /project/
