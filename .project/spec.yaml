@@ -85,13 +85,11 @@ environment:
                 - pydantic==1.10.13  # <--- ADD THIS LINE
                 - confz==1.6.0       # <--- ADD THIS LINE for safety
                 - langchain-nvidia-ai-endpoints
-        package_manager_environment:
+    package_manager_environment:
             name: ""
             target: ""
-#    compose_file_path: ""
-# environment:
-    # ... keep your existing base image settings ...
-variables:
+    compose_file_path: "docker-compose.yaml"
+    variables:
         - name: NVIDIA_LLM_URL
           value: "http://host.docker.internal:8000/v1"
         - name: NVIDIA_EMBED_URL
@@ -102,8 +100,6 @@ variables:
           value: "nvidia/llama-3.2-nemoretriever-300m-embed-v1"
         - name: NIM_MAX_MODEL_LEN
           value: "16384"
-        # This points AI Workbench to your docker-compose file for sidecar NIMs
-        compose_file_path: "docker-compose.yaml"
 execution:
     apps:
         - name: Visual Studio Code
