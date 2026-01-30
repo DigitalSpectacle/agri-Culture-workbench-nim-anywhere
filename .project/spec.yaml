@@ -88,7 +88,7 @@ environment:
         package_manager_environment:
             name: ""
             target: ""
-    compose_file_path: docker-compose.yaml
+    compose_file_path: "/home/sparky/nvidia-workbench/DigitalSpectacle-agri-Culture-workbench-nim-anywhere/docker-compose.yaml"
 execution:
     apps:
         - name: Visual Studio Code
