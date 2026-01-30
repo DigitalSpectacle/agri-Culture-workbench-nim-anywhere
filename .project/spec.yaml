@@ -106,18 +106,12 @@ execution:
           type: vs-code
           class: native
           start_command: ""
-          health_check_command: '[ \$(ps aux | grep ".vscode-server" | grep -v grep | wc -l ) -gt 4 ]'
-          stop_command: "pkill -f .vscode-server"
+          health_check_command: '[ \$(ps aux | grep ".vscode-server" | grep -v grep | wc -l ) -gt 4 ] && [ \$(ps aux | grep "/.vscode-server/bin/.*/node .* net.createConnection" | grep -v grep | wc -l) -gt 0 ]'
+          stop_command: ""
           user_msg: ""
           logfile_path: ""
           timeout_seconds: 120
           icon_url: ""
-          webapp_options:
-              autolaunch: false
-              port: "0"
-              proxy:
-                  trim_prefix: false
-              url: http://localhost
         - name: Chat Frontend
           type: custom
           class: webapp
@@ -129,40 +123,60 @@ execution:
           timeout_seconds: 60
           icon_url: ""
           webapp_options:
-              autolaunch: true
-              port: "7070"
-              proxy:
-                  trim_prefix: false
-              url: http://localhost:7070/
+            autolaunch: true
+            port: "7070"
+            proxy:
+                trim_prefix: false
+            url: http://localhost:7070/
         - name: Chain Server
           type: custom
           class: webapp
-          start_command: export PROXY_PREFIX && export NGC_API_KEY && cd /project/code && APP_LOG_LEVEL=DEBUG uvicorn --log-level info chain_server.server:app --port 3030 --host 0.0.0.0 --timeout-graceful-shutdown 10 --reload --reload-include reload
-          health_check_command: ps aux | grep -v grep | grep chain_server.server:app
+          start_command: export PROXY_PREFIX && export NGC_API_KEY && cd /project/code && APP_LOG_LEVEL=DEBUG uvicorn --log-level info chain_server.server:app --port 3030 --host 0.0.0.0 --timeout-graceful-shutdown 10 --reload-exclude 'frontend/*' --reload-exclude 'evaluation/*' --reload-include '*.html' --reload-include '*.css' --reload-include '*.yaml' --reload-include '*.js' --reload --reload-include reload
+          health_check_command: ps aux |grep -v grep | grep chain_server.server:app
           stop_command: ps aux | grep chain_server.server:app | grep -v grep | awk '{print $2}' | xargs kill
           user_msg: ""
           logfile_path: ""
           timeout_seconds: 60
+          icon_url: avatars.githubusercontent.com/u/126733545
+          webapp_options:
+            autolaunch: false
+            port: "3030"
+            proxy:
+                trim_prefix: true
+            url: http://localhost:3030
+        - name: Tutorial
+          type: custom
+          class: webapp
+          start_command: |-
+            cd /project/code/tutorial_app && \
+            export PROXY_PREFIX && \
+            streamlit run app.py --server.baseUrlPath=$PROXY_PREFIX
+          health_check_command: curl -I http://localhost:8501
+          stop_command: |
+            pkill -9 -f 'streamlit run app.py'
+          user_msg: ""
+          logfile_path: ""
+          timeout_seconds: 15
           icon_url: ""
           webapp_options:
-              autolaunch: false
-              port: "3030"
-              proxy:
-                  trim_prefix: true
-              url: http://localhost:3030
-resources:
-    gpu:
-        requested: 1
-    sharedMemoryMB: 16384
-secrets:
-    - variable: NGC_API_KEY
-      description: "NVIDIA NGC API Key"
-mounts:
-    - type: project
-      target: /project/
-      description: Project directory
-      options: rw
-    - type: volume
-      target: /nvwb-shared-volume/
-      description: "Shared volume"
-      options: volumeName=nvwb-shared-volume
+            autolaunch: true
+            port: "8501"
+            proxy:
+                trim_prefix: false
+            url: http://localhost:8501
+    resources:
+        gpu:
+            requested: 1
+        sharedMemoryMB: 16384
+    secrets:
+        - variable: NGC_API_KEY
+          description: NGC Personal Key from https://org.ngc.nvidia.com/setup/personal-keys
+    mounts:
+        - type: project
+          target: /project/
+          description: Project directory
+          options: rw
+        - type: volume
+          target: /nvwb-shared-volume/
+          description: ""
+          options: volumeName=nvwb-shared-volume
