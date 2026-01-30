@@ -102,8 +102,8 @@ variables:
           value: "nvidia/llama-3.2-nemoretriever-300m-embed-v1"
         - name: NIM_MAX_MODEL_LEN
           value: "16384"
-    # This points AI Workbench to your docker-compose file for sidecar NIMs
-    compose_file_path: "docker-compose.yaml"
+        # This points AI Workbench to your docker-compose file for sidecar NIMs
+        compose_file_path: "docker-compose.yaml"
 execution:
     apps:
         - name: Visual Studio Code
