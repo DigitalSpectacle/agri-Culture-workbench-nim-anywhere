@@ -3,7 +3,7 @@ specMinorVersion: 2
 meta:
     name: nim-anywhere
     image: project-nim-anywhere
-    description: "Enterprise RAG for agri-Culture.click Phase I - DGX Spark Optimized"
+    description: Enterprise RAG for agri-Culture.click Phase I - DGX Spark Optimized
     labels:
         - RAG
         - NIM
@@ -46,11 +46,11 @@ environment:
               timeout_seconds: 60
               icon_url: ""
               webapp_options:
-                  autolaunch: true
-                  port: "8888"
-                  proxy:
-                      trim_prefix: false
-                  url_command: jupyter lab list | head -n 2 | tail -n 1 | cut -f1 -d' ' | grep -v 'Currently'
+                autolaunch: true
+                port: "8888"
+                proxy:
+                    trim_prefix: false
+                url_command: jupyter lab list | head -n 2 | tail -n 1 | cut -f1 -d' ' | grep -v 'Currently'
         programming_languages:
             - python3
         icon_url: ""
@@ -67,39 +67,28 @@ environment:
             - name: apt
               binary_path: /usr/bin/apt
               installed_packages:
-                  - curl
-                  - git
-                  - git-lfs
-                  - python3
-                  - gcc
-                  - python3-dev
-                  - python3-pip
-                  - vim
-                  - less
-                  - jq
-                  - ssh
+                - curl
+                - git
+                - git-lfs
+                - python3
+                - gcc
+                - python3-dev
+                - python3-pip
+                - vim
+                - less
+                - jq
+                - ssh
             - name: pip
               binary_path: /usr/local/bin/pip
               installed_packages:
-                  - jupyterlab==4.0.7
-                  - pydantic==1.10.13
-                  - confz==1.6.0
-                  - langchain-nvidia-ai-endpoints
+                - jupyterlab==4.0.7
+                - pydantic==1.10.13
+                - confz==1.6.0
+                - langchain-nvidia-ai-endpoints
         package_manager_environment:
             name: ""
             target: ""
-    compose_file_path: "docker-compose.yaml"
-    variables:
-        - name: NVIDIA_LLM_URL
-          value: "http://host.docker.internal:8000/v1"
-        - name: NVIDIA_EMBED_URL
-          value: "http://host.docker.internal:8001/v1"
-        - name: LLM_MODEL_NAME
-          value: "meta/llama-3.1-8b-instruct"
-        - name: EMBEDDING_MODEL_NAME
-          value: "nvidia/llama-3.2-nemoretriever-300m-embed-v1"
-        - name: NIM_MAX_MODEL_LEN
-          value: "16384"
+    compose_file_path: docker-compose.yaml
 execution:
     apps:
         - name: Visual Studio Code
