@@ -15,7 +15,6 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-
   embed-nim:
     image: nvcr.io/nim/nvidia/llama-3.2-nemoretriever-300m-embed-v1:latest
     environment:
