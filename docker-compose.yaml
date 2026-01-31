@@ -22,7 +22,7 @@ services:
       - NIM_DISABLE_CUDA_GRAPH=1
     ports:
       - "8001:8000"
-etcd:
+  etcd:
     container_name: milvus-etcd
     image: quay.io/coreos/etcd:v3.5.5
     environment:
